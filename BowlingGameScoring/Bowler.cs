@@ -21,17 +21,26 @@ namespace BowlingGameScoring
             FrameAttempt = 1;
         }
         
-        public int Bowl(int pinsDownFirstAttempt, int pinsDownSecondAttempt)
+        public int Bowl(int previousFrameScore, int pinsDownFirstAttempt, int pinsDownSecondAttempt)
         {
             var firstTry = Attempt(pinsDownFirstAttempt);
             var secondTry = 0;
+
+
             if (firstTry != 10)
             {
                 secondTry = Attempt(pinsDownSecondAttempt);
             }
-            FrameScore = firstTry + secondTry;
+            if (previousFrameScore == 10)
+            {
+                FrameScore = (firstTry * 2) + secondTry;
+            }
+            else
+            {
+                FrameScore = firstTry + secondTry;
+            }
             Score += FrameScore;
-            return Score;
+            return FrameScore;
         }
 
         public int Attempt(int pinsKnockedDown)
